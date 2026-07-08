@@ -1,3 +1,4 @@
+import { db, auth, storage } from "./firebase.js";
 /* ============================================================
    PhotoRetouch Pro — Script principal (comportements communs)
    ============================================================ */
