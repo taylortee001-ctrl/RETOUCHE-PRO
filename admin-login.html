@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Connexion Admin — PhotoRetouch Pro</title>
+<link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3004/3004458.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="admin-login-wrap">
+  <div class="admin-login-card">
+    <div class="logo-mark"><i class="fa-solid fa-lock"></i></div>
+    <h2>Espace Administration</h2>
+    <p class="subtitle">Accès réservé — PhotoRetouch Pro</p>
+
+    <div id="alert-zone"></div>
+
+    <form id="login-form">
+      <div class="form-group">
+        <label for="admin_email">Email administrateur</label>
+        <input type="email" id="admin_email" class="form-control" placeholder="admin@photoretouchpro.com" required>
+      </div>
+      <div class="form-group">
+        <label for="admin_password">Mot de passe</label>
+        <input type="password" id="admin_password" class="form-control" placeholder="••••••••" required>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block"><i class="fa-solid fa-right-to-bracket"></i> Se connecter</button>
+    </form>
+
+    <a href="index.html" style="display:block; margin-top:24px; font-size:0.85rem; color:var(--color-grey);"><i class="fa-solid fa-arrow-left"></i> Retour au site</a>
+  </div>
+</div>
+
+<script src="js/data.js"></script>
+<script>
+  document.getElementById("login-form").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const email = document.getElementById("admin_email").value.trim().toLowerCase();
+    const password = document.getElementById("admin_password").value;
+    const zone = document.getElementById("alert-zone");
+
+    if (email === ADMIN_EMAIL.toLowerCase() && password === ADMIN_PASSWORD) {
+      sessionStorage.setItem("prp_admin_auth", "true");
+      window.location.href = "admin.html";
+    } else {
+      zone.innerHTML = `<div class="alert alert-error"><i class="fa-solid fa-circle-exclamation"></i><span>Email ou mot de passe incorrect.</span></div>`;
+    }
+  });
+
+  // Si déjà connecté, rediriger directement
+  if (sessionStorage.getItem("prp_admin_auth") === "true") {
+    window.location.href = "admin.html";
+  }
+</script>
+</body>
+</html>
